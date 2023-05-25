@@ -12,6 +12,8 @@ depth = -1 .* gsw_z_from_p.(pressure, data["latitude"], 0, 0)
 
 abs_sal = gsw_sa_from_sp.(data["salinity"], pressure, data["longitude"], data["latitude"])
 
+abs_sal[isapprox.(abs_sal, 9.0e15)] .= NaN
+
 cons_temp = gsw_ct_from_t.(abs_sal, data["temperature"], pressure)
 
 pot_dens_anom = gsw_sigma0.(abs_sal, cons_temp)
